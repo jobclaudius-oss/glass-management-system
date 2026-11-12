@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#10182d">
+    <meta name="description" content="Glass Management System - Manage glass inventory, sales, customers, orders, cutting, installations and business operations.">
+
+    <title>Glass Management System | Business Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="app-container" id="app">
+
+    <!-- Mobile Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-brand">
+            <div class="brand-logo">
+                <svg viewBox="0 0 48 48" aria-hidden="true">
+                    <path d="M8 8h32v32H8z" fill="none"
+                          stroke="currentColor" stroke-width="3"/>
+                    <path d="M16 16h16v16H16z" fill="none"
+                          stroke="currentColor" stroke-width="2"/>
+                    <path d="M8 8l32 32" stroke="currentColor"
+                          stroke-width="1.5" opacity=".5"/>
+                </svg>
+            </div>
+
+            <div class="brand-text">
+                <h2>Glass<span>Pro</span></h2>
+                <p>Management Suite</p>
+            </div>
+
+            <button class="sidebar-close" id="sidebarClose"
+                    aria-label="Close navigation">
+                &times;
+            </button>
+        </div>
+
+        <div class="sidebar-business">
+            <div class="business-avatar">GP</div>
+            <div>
+                <h4>Glass Business</h4>
+                <span>Administrator</span>
+            </div>
+            <span class="online-indicator" aria-label="Online"></span>
+        </div>
+
+        <nav class="sidebar-navigation" aria-label="Main navigation">
+
+            <p class="nav-heading">MAIN MENU</p>
+
+            <a href="#dashboard" class="nav-link active"
+               data-page="dashboard">
+                <span class="nav-icon">⌂</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="#inventory" class="nav-link"
+               data-page="inventory">
+                <span class="nav-icon">▤</span>
+                <span>Glass Inventory</span>
+                <span class="nav-counter" id="inventoryNavCount">0</span>
+            </a>
+
+            <a href="#categories" class="nav-link"
+               data-page="categories">
+                <span class="nav-icon">▦</span>
+                <span>Glass Categories</span>
+            </a>
+
+            <a href="#products" class="nav-link"
+               data-page="products">
+                <span class="nav-icon">◇</span>
+                <span>Product Management</span>
+            </a>
+
+            <a href="#sales" class="nav-link"
+               data-page="sales">
+                <span class="nav-icon">＄</span>
+                <span>Sales Management</span>
+            </a>
+
+            <a href="#customers" class="nav-link"
+               data-page="customers">
+                <span class="nav-icon">♙</span>
+                <span>Customer Management</span>
+            </a>
+
+            <a href="#suppliers" class="nav-link"
+               data-page="suppliers">
+                <span class="nav-icon">♧</span>
+                <span>Suppliers</span>
+            </a>
+
+            <a href="#purchases" class="nav-link"
+               data-page="purchases">
+                <span class="nav-icon">⇩</span>
+                <span>Purchase Management</span>
+            </a>
+
+            <a href="#orders" class="nav-link"
+               data-page="orders">
+                <span class="nav-icon">▣</span>
+                <span>Orders Management</span>
+            </a>
+
+            <p class="nav-heading">OPERATIONS</p>
+
+            <a href="#cutting" class="nav-link"
+               data-page="cutting">
+                <span class="nav-icon">✂</span>
+                <span>Glass Cutting</span>
+            </a>
+
+            <a href="#installation" class="nav-link"
+               data-page="installation">
+                <span class="nav-icon">⌖</span>
+                <span>Installation</span>
+            </a>
+
+            <a href="#staff" class="nav-link"
+               data-page="staff">
+                <span class="nav-icon">♧</span>
+                <span>Staff Management</span>
+            </a>
+
+            <a href="#expenses" class="nav-link"
+               data-page="expenses">
+                <span class="nav-icon">↗</span>
+                <span>Expenses</span>
+            </a>
+
+            <p class="nav-heading">BUSINESS ANALYSIS</p>
+
+            <a href="#reports" class="nav-link"
+               data-page="reports">
+                <span class="nav-icon">▥</span>
+                <span>Reports & Analytics</span>
+            </a>
+
+            <p class="nav-heading">SYSTEM</p>
+
+            <a href="#settings" class="nav-link"
+               data-page="settings">
+                <span class="nav-icon">⚙</span>
+                <span>Settings</span>
+            </a>
+
+            <a href="logout.php" class="nav-link logout-link">
+                <span class="nav-icon">⇥</span>
+                <span>Logout</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="sidebar-footer-card">
+                <div class="footer-icon">✦</div>
+                <h4>Business Overview</h4>
+                <p>Keep your glass business organized and running smoothly.</p>
+            </div>
+
+            <div class="sidebar-copyright">
+                GlassPro Management Suite
+                <span>Version 1.0.0</span>
+            </div>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- TOP HEADER -->
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button class="menu-toggle" id="menuToggle"
+                        aria-label="Open navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <div class="page-heading">
+                    <h1 id="pageTitle">Dashboard</h1>
+                    <p id="pageSubtitle">
+                        Welcome back! Here's what's happening with your business.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="topbar-right">
+
+                <div class="header-date" id="headerDate">
+                    <span>Today</span>
+                </div>
+
+                <button class="icon-button notification-button"
+                        id="notificationButton"
+                        aria-label="Notifications">
+                    ♧
+                    <span class="notification-dot"></span>
+                </button>
+
+                <button class="icon-button theme-toggle"
+                        id="themeToggle"
+                        aria-label="Toggle theme">
+                    ◐
+                </button>
+
+                <div class="header-profile">
+                    <div class="profile-avatar">AD</div>
+                    <div class="profile-details">
+                        <strong>Administrator</strong>
+                        <span>System Admin</span>
+                    </div>
+                    <span class="profile-arrow">⌄</span>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- PAGE CONTENT -->
+        <div class="content-wrapper">
+
+            <!-- ======================================
+                 DASHBOARD
+            ======================================= -->
+
+            <section class="page-section active"
+                     id="dashboard"
+                     data-section="dashboard">
+
+                <div class="welcome-banner">
+
+                    <div class="welcome-content">
+                        <span class="welcome-label">BUSINESS OVERVIEW</span>
+
+                        <h2>Manage your glass business with confidence.</h2>
+
+                        <p>
+                            Monitor your inventory, sales, customers and daily
+                            operations from one central workspace.
+                        </p>
+
+                        <div class="welcome-actions">
+                            <button class="btn btn-primary"
+                                    data-action="new-sale">
+                                + Record New Sale
+                            </button>
+
+                            <button class="btn btn-secondary"
+                                    data-action="new-product">
+                                + Add Glass Product
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="welcome-decoration" aria-hidden="true">
+                        <div class="glass-decoration glass-one"></div>
+                        <div class="glass-decoration glass-two"></div>
+                        <div class="glass-decoration glass-three"></div>
+                    </div>
+
+                </div>
+
+
+                <!-- STATISTICS -->
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Business Statistics</h2>
+                        <p>Your business performance at a glance.</p>
+                    </div>
+
+                    <button class="btn btn-light"
+                            data-action="refresh-dashboard">
+                        ↻ Refresh
+                    </button>
+                </div>
+
+                <div class="stats-grid">
+
+                    <article class="stat-card">
+                        <div class="stat-card-top">
+                            <div class="stat-icon blue">▤</div>
+                            <span class="stat-trend positive">Inventory</span>
+                        </div>
+                        <p>Total Glass Products</p>
+                        <h3 id="totalProducts">0</h3>
+                        <span class="stat-description">Products in stock</span>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-card-top">
+                            <div class="stat-icon purple">＄</div>
+                            <span class="stat-trend positive">Sales</span>
+                        </div>
+                        <p>Total Sales</p>
+                        <h3 id="totalSales">0</h3>
+                        <span class="stat-description">Recorded transactions</span>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-card-top">
+                            <div class="stat-icon green">♙</div>
+                            <span class="stat-trend positive">Customers</span>
+                        </div>
+                        <p>Total Customers</p>
+                        <h3 id="totalCustomers">0</h3>
+                        <span class="stat-description">Registered customers</span>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-card-top">
+                            <div class="stat-icon orange">▣</div>
+                            <span class="stat-trend neutral">Orders</span>
+                        </div>
+                        <p>Total Orders</p>
+                        <h3 id="totalOrders">0</h3>
+                        <span class="stat-description">All recorded orders</span>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-card-top">
+                            <div class="stat-icon orange">◷</div>
+                            <span class="stat-trend neutral">Pending</span>
+                        </div>
+                        <p>Pending Orders</p>
+                        <h3 id="pendingOrders">0</h3>
+                        <span class="stat-description">Awaiting processing</span>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-card-top">
+                            <div class="stat-icon green">✓</div>
+                            <span class="stat-trend positive">Completed</span>
+                        </div>
+                        <p>Completed Orders</p>
+                        <h3 id="completedOrders">0</h3>
+                        <span class="stat-description">Successfully completed</span>
+                    </article>
+
+                    <article class="stat-card revenue-card">
+                        <div class="stat-card-top">
+                            <div class="stat-icon green">↗</div>
+                            <span class="stat-trend positive">Revenue</span>
+                        </div>
+                        <p>Total Revenue</p>
+                        <h3 id="totalRevenue">₦0.00</h3>
+                        <span class="stat-description">Total recorded sales revenue</span>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-card-top">
+                            <div class="stat-icon red">!</div>
+                            <span class="stat-trend negative">Attention</span>
+                        </div>
+                        <p>Low Stock Alerts</p>
+                        <h3 id="lowStockCount">0</h3>
+                        <span class="stat-description">Products requiring restocking</span>
+                    </article>
+
+                </div>
+
+
+                <!-- CHARTS -->
+
+                <div class="dashboard-grid">
+
+                    <article class="panel sales-chart-panel">
+
+                        <div class="panel-header">
+                            <div>
+                                <h3>Sales Overview</h3>
+                                <p>Monitor your sales performance.</p>
+                            </div>
+
+                            <select id="salesPeriod"
+                                    aria-label="Sales chart period">
+                                <option value="weekly">This Week</option>
+                                <option value="monthly" selected>This Month</option>
+                                <option value="yearly">This Year</option>
+                            </select>
+                        </div>
+
+                        <div class="chart-summary">
+                            <div>
+                                <span>Total Revenue</span>
+                                <h2 id="chartRevenue">₦0.00</h2>
+                            </div>
+                            <span class="chart-indicator">Revenue</span>
+                        </div>
+
+                        <div class="chart-container" id="salesChart"
+                             role="img"
+                             aria-label="Sales overview chart will appear here">
+                            <div class="chart-empty">
+                                Sales chart will appear here.
+                            </div>
+                        </div>
+
+                    </article>
+
+
+                    <article class="panel inventory-summary-panel">
+
+                        <div class="panel-header">
+                            <div>
+                                <h3>Inventory Summary</h3>
+                                <p>Current stock overview.</p>
+                            </div>
+                        </div>
+
+                        <div class="inventory-summary-content"
+                             id="inventorySummary">
+
+                            <div class="summary-placeholder">
+                                Inventory information will appear here.
+                            </div>
+
+                        </div>
+
+                        <a href="#inventory" class="panel-link">
+                            View Inventory →
+                        </a>
+
+                    </article>
+
+                </div>
+
+
+                <!-- RECENT ORDERS AND TRANSACTIONS -->
+
+                <div class="dashboard-grid">
+
+                    <article class="panel">
+
+                        <div class="panel-header">
+                            <div>
+                                <h3>Recent Orders</h3>
+                                <p>Latest customer orders.</p>
+                            </div>
+
+                            <a href="#orders" class="panel-link">
+                                View All →
+                            </a>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Customer</th>
+                                        <th>Date</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="recentOrdersTable">
+                                    <tr>
+                                        <td colspan="5" class="empty-table">
+                                            No orders to display yet.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </article>
+
+
+                    <article class="panel">
+
+                        <div class="panel-header">
+                            <div>
+                                <h3>Recent Transactions</h3>
+                                <p>Latest sales and payments.</p>
+                            </div>
+
+                            <a href="#sales" class="panel-link">
+                                View All →
+                            </a>
+                        </div>
+
+                        <div class="transaction-list"
+                             id="recentTransactions">
+
+                            <div class="empty-state">
+                                No transactions to display yet.
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <!-- TOP PRODUCTS AND LOW STOCK -->
+
+                <div class="dashboard-grid">
+
+                    <article class="panel">
+
+                        <div class="panel-header">
+                            <div>
+                                <h3>Top-Selling Products</h3>
+                                <p>Products performing well.</p>
+                            </div>
+                        </div>
+
+                        <div id="topProducts">
+                            <div class="empty-state">
+                                Product performance will appear here.
+                            </div>
+                        </div>
+
+                    </article>
+
+
+                    <article class="panel">
+
+                        <div class="panel-header">
+                            <div>
+                                <h3>Low Stock Alerts</h3>
+                                <p>Products that need attention.</p>
+                            </div>
+
+                            <a href="#inventory" class="panel-link">
+                                Manage Stock →
+                            </a>
+                        </div>
+
+                        <div id="lowStockProducts">
+                            <div class="empty-state">
+                                No low-stock information available.
+                            </div>
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- ======================================
+                 INVENTORY
+            ======================================= -->
+
+            <section class="page-section" id="inventory"
+                     data-section="inventory">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Glass Inventory</h2>
+                        <p>Manage stock quantities, glass specifications and prices.</p>
+                    </div>
+
+                    <button class="btn btn-primary" data-action="new-product">
+                        + Add New Product
+                    </button>
+                </div>
+
+                <div class="stats-grid compact-stats">
+                    <article class="stat-card">
+                        <p>Total Products</p>
+                        <h3 id="inventoryTotalProducts">0</h3>
+                    </article>
+                    <article class="stat-card">
+                        <p>Total Stock Quantity</p>
+                        <h3 id="inventoryTotalQuantity">0</h3>
+                    </article>
+                    <article class="stat-card">
+                        <p>Low Stock Products</p>
+                        <h3 id="inventoryLowStock">0</h3>
+                    </article>
+                    <article class="stat-card">
+                        <p>Inventory Value</p>
+                        <h3 id="inventoryValue">₦0.00</h3>
+                    </article>
+                </div>
+
+                <article class="panel">
+                    <div class="toolbar">
+                        <input type="search" id="inventorySearch"
+                               placeholder="Search product name or code..."
+                               aria-label="Search inventory">
+
+                        <select id="inventoryCategoryFilter"
+                                aria-label="Filter by category">
+                            <option value="">All Categories</option>
+                        </select>
+
+                        <select id="inventoryStockFilter"
+                                aria-label="Filter by stock">
+                            <option value="">All Stock Levels</option>
+                            <option value="available">Available</option>
+                            <option value="low">Low Stock</option>
+                            <option value="out">Out of Stock</option>
+                        </select>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Code</th>
+                                    <th>Category</th>
+                                    <th>Thickness</th>
+                                    <th>Dimensions</th>
+                                    <th>Quantity</th>
+                                    <th>Unit Price</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inventoryTableBody">
+                                <tr>
+                                    <td colspan="8" class="empty-table">
+                                        Inventory records will appear here.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination" id="inventoryPagination"></div>
+                </article>
+
+            </section>
+
+
+            <!-- ======================================
+                 CATEGORIES
+            ======================================= -->
+
+            <section class="page-section" id="categories"
+                     data-section="categories">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Glass Categories</h2>
+                        <p>Organize your glass products by type.</p>
+                    </div>
+
+                    <button class="btn btn-primary"
+                            data-action="new-category">
+                        + Add Category
+                    </button>
+                </div>
+
+                <div class="category-grid" id="categoryGrid">
+                    <div class="empty-state">
+                        Glass categories will appear here.
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- ======================================
+                 PRODUCT MANAGEMENT
+            ======================================= -->
+
+            <section class="page-section" id="products"
+                     data-section="products">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Product Management</h2>
+                        <p>Manage product specifications, pricing and descriptions.</p>
+                    </div>
+
+                    <button class="btn btn-primary" data-action="new-product">
+                        + Add Product
+                    </button>
+                </div>
+
+                <article class="panel">
+                    <div class="toolbar">
+                        <input type="search" id="productSearch"
+                               placeholder="Search products..."
+                               aria-label="Search products">
+                        <select id="productCategoryFilter"
+                                aria-label="Filter products by category">
+                            <option value="">All Categories</option>
+                        </select>
+                    </div>
+
+                    <div id="productManagementGrid" class="product-grid">
+                        <div class="empty-state">
+                            Your product catalogue will appear here.
+                        </div>
+                    </div>
+                </article>
+
+            </section>
+
+
+            <!-- ======================================
+                 SALES
+            ======================================= -->
+
+            <section class="page-section" id="sales"
+                     data-section="sales">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Sales Management</h2>
+                        <p>Record sales, process payments and manage receipts.</p>
+                    </div>
+
+                    <button class="btn btn-primary" data-action="new-sale">
+                        + Record New Sale
+                    </button>
+                </div>
+
+                <div class="stats-grid compact-stats">
+                    <article class="stat-card">
+                        <p>Total Transactions</p>
+                        <h3 id="salesTotalTransactions">0</h3>
+                    </article>
+                    <article class="stat-card">
+                        <p>Total Sales Revenue</p>
+                        <h3 id="salesTotalRevenue">₦0.00</h3>
+                    </article>
+                    <article class="stat-card">
+                        <p>Paid Sales</p>
+                        <h3 id="salesPaidCount">0</h3>
+                    </article>
+                    <article class="stat-card">
+                        <p>Outstanding Payments</p>
+                        <h3 id="salesOutstanding">₦0.00</h3>
+                    </article>
+                </div>
+
+                <article class="panel">
+                    <div class="toolbar">
+                        <input type="search" id="salesSearch"
+                               placeholder="Search receipt or customer..."
+                               aria-label="Search sales">
+                        <select id="salesPaymentFilter"
+                                aria-label="Filter sales by payment">
+                            <option value="">All Payment Methods</option>
+                            <option value="cash">Cash</option>
+                            <option value="bank">Bank Transfer</option>
+                            <option value="pos">POS</option>
+                            <option value="card">Card</option>
+                        </select>
+                        <input type="date" id="salesDateFilter"
+                               aria-label="Filter sales by date">
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Receipt No.</th>
+                                    <th>Customer</th>
+                                    <th>Date</th>
+                                    <th>Items</th>
+                                    <th>Amount</th>
+                                    <th>Payment</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="salesTableBody">
+                                <tr>
+                                    <td colspan="7" class="empty-table">
+                                        Sales records will appear here.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+            </section>
+
+
+            <!-- ======================================
+                 CUSTOMERS
+            ======================================= -->
+
+            <section class="page-section" id="customers"
+                     data-section="customers">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Customer Management</h2>
+                        <p>Manage customer information and purchase history.</p>
+                    </div>
+
+                    <button class="btn btn-primary"
+                            data-action="new-customer">
+                        + Add Customer
+                    </button>
+                </div>
+
+                <div class="stats-grid compact-stats">
+                    <article class="stat-card">
+                        <p>Total Customers</p>
+                        <h3 id="customerTotal">0</h3>
+                    </article>
+                    <article class="stat-card">
+                        <p>Individual Customers</p>
+                        <h3 id="customerIndividual">0</h3>
+                    </article>
+                    <article class="stat-card">
+                        <p>Business Customers</p>
+                        <h3 id="customerBusiness">0</h3>
+                    </article>
+                    <article class="stat-card">
+                        <p>Outstanding Balances</p>
+                        <h3 id="customerOutstanding">₦0.00</h3>
+                    </article>
+                </div>
+
+                <article class="panel">
+                    <div class="toolbar">
+                        <input type="search" id="customerSearch"
+                               placeholder="Search name, phone or email..."
+                               aria-label="Search customers">
+
+                        <select id="customerTypeFilter"
+                                aria-label="Filter customer type">
+                            <option value="">All Customer Types</option>
+                            <option value="individual">Individual</option>
+                            <option value="business">Business</option>
+                        </select>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Customer Type</th>
+                                    <th>Total Purchases</th>
+                                    <th>Outstanding</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customersTableBody">
+                                <tr>
+                                    <td colspan="7" class="empty-table">
+                                        Customer records will appear here.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+            </section>
+
+
+            <!-- ======================================
+                 SUPPLIERS
+            ======================================= -->
+
+            <section class="page-section" id="suppliers"
+                     data-section="suppliers">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Suppliers</h2>
+                        <p>Manage supplier contacts and business relationships.</p>
+                    </div>
+
+                    <button class="btn btn-primary"
+                            data-action="new-supplier">
+                        + Add Supplier
+                    </button>
+                </div>
+
+                <article class="panel">
+                    <div class="toolbar">
+                        <input type="search" id="supplierSearch"
+                               placeholder="Search suppliers..."
+                               aria-label="Search suppliers">
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Supplier</th>
+                                    <th>Contact Person</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Address</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="suppliersTableBody">
+                                <tr>
+                                    <td colspan="6" class="empty-table">
+                                        Supplier records will appear here.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+            </section>
+
+
+            <!-- ======================================
+                 PURCHASE MANAGEMENT
+            ======================================= -->
+
+            <section class="page-section" id="purchases"
+                     data-section="purchases">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Purchase Management</h2>
+                        <p>Record purchases and monitor supplier payments.</p>
+                    </div>
+
+                    <button class="btn btn-primary"
+                            data-action="new-purchase">
+                        + New Purchase
+                    </button>
+                </div>
+
+                <div class="stats-grid compact-stats">
+                    <article class="stat-card">
+                        <p>Total Purchases</p>
+                        <h3 id="purchaseTotal">0</h3>
+                    </article>
+                    <article class="stat-card">
+                        <p>Total Purchase Cost</p>
+                        <h3 id="purchaseCost">₦0.00</h3>
+                    </article>
+                    <article class="stat-card">
+                        <p>Pending Payments</p>
+                        <h3 id="purchasePending">₦0.00</h3>
+                    </article>
+                    <article class="stat-card">
+                        <p>Paid Purchases</p>
+                        <h3 id="purchasePaid">0</h3>
+                    </article>
+                </div>
+
+                <article class="panel">
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Purchase ID</th>
+                                    <th>Supplier</th>
+                                    <th>Date</th>
+                                    <th>Products</th>
+                                    <th>Total Cost</th>
+                                    <th>Payment Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="purchasesTableBody">
+                                <tr>
+                                    <td colspan="7" class="empty-table">
+                                        Purchase records will appear here.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+            </section>
+
+
+            <!-- ======================================
+                 ORDERS
+            ======================================= -->
+
+            <section class="page-section" id="orders"
+                     data-section="orders">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Orders Management</h2>
+                        <p>Track customer orders from creation to completion.</p>
+                    </div>
+
+                    <button class="btn btn-primary" data-action="new-order">
+                        + Create Order
+                    </button>
+                </div>
+
+                <div class="order-status-grid">
+                    <div class="status-card">
+                        <span>Pending</span>
+                        <strong id="ordersPending">0</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>Processing</span>
+                        <strong id="ordersProcessing">0</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>Approved</span>
+                        <strong id="ordersApproved">0</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>Ready for Pickup</span>
+                        <strong id="ordersReady">0</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>Out for Delivery</span>
+                        <strong id="ordersDelivery">0</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>Completed</span>
+                        <strong id="ordersCompleted">0</strong>
+                    </div>
+                </div>
+
+                <article class="panel">
+                    <div class="toolbar">
+                        <input type="search" id="orderSearch"
+                               placeholder="Search order or customer..."
+                               aria-label="Search orders">
+
+                        <select id="orderStatusFilter"
+                                aria-label="Filter orders by status">
+                            <option value="">All Statuses</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Approved">Approved</option>
+                            <option value="Ready for Pickup">Ready for Pickup</option>
+                            <option value="Out for Delivery">Out for Delivery</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Order Date</th>
+                                    <th>Delivery Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ordersTableBody">
+                                <tr>
+                                    <td colspan="7" class="empty-table">
+                                        Order records will appear here.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+            </section>
+
+
+            <!-- ======================================
+                 GLASS CUTTING
+            ======================================= -->
+
+            <section class="page-section" id="cutting"
+                     data-section="cutting">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Glass Cutting Management</h2>
+                        <p>Manage glass measurements, cutting jobs and technicians.</p>
+                    </div>
+
+                    <button class="btn btn-primary"
+                            data-action="new-cutting">
+                        + New Cutting Job
+                    </button>
+                </div>
+
+                <div class="order-status-grid">
+                    <div class="status-card">
+                        <span>Pending</span>
+                        <strong id="cuttingPending">0</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>In Progress</span>
+                        <strong id="cuttingProgress">0</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>Completed</span>
+                        <strong id="cuttingCompleted">0</strong>
+                    </div>
+                </div>
+
+                <article class="panel">
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Job ID</th>
+                                    <th>Glass Product</th>
+                                    <th>Thickness</th>
+                                    <th>Dimensions</th>
+                                    <th>Pieces</th>
+                                    <th>Technician</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cuttingTableBody">
+                                <tr>
+                                    <td colspan="8" class="empty-table">
+                                        Cutting jobs will appear here.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+            </section>
+
+
+            <!-- ======================================
+                 INSTALLATION
+            ======================================= -->
+
+            <section class="page-section" id="installation"
+                     data-section="installation">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Installation Management</h2>
+                        <p>Schedule and track glass installation projects.</p>
+                    </div>
+
+                    <button class="btn btn-primary"
+                            data-action="new-installation">
+                        + Schedule Installation
+                    </button>
+                </div>
+
+                <div class="order-status-grid">
+                    <div class="status-card">
+                        <span>Scheduled</span>
+                        <strong id="installationScheduled">0</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>In Progress</span>
+                        <strong id="installationProgress">0</strong>
+                    </div>
+                    <div class="status-card">
+                        <span>Completed</span>
+                        <strong id="installationCompleted">0</strong>
+                    </div>
+                </div>
+
+                <article class="panel">
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Installation ID</th>
+                                    <th>Customer</th>
+                                    <th>Location</th>
+                                    <th>Installation Date</th>
+                                    <th>Technician</th>
+                                    <th>Charges</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="installationTableBody">
+                                <tr>
+                                    <td colspan="8" class="empty-table">
+                                        Installation records will appear here.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+            </section>
+
+
+            <!-- ======================================
+                 STAFF
+            ======================================= -->
+
+            <section class="page-section" id="staff"
+                     data-section="staff">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Staff Management</h2>
+                        <p>Manage employees, technicians and work assignments.</p>
+                    </div>
+
+                    <button class="btn btn-primary" data-action="new-staff">
+                        + Add Staff Member
+                    </button>
+                </div>
+
+                <article class="panel">
+                    <div class="toolbar">
+                        <input type="search" id="staffSearch"
+                               placeholder="Search staff members..."
+                               aria-label="Search staff">
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Staff Member</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Department</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="staffTableBody">
+                                <tr>
+                                    <td colspan="7" class="empty-table">
+                                        Staff records will appear here.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+            </section>
+
+
+            <!-- ======================================
+                 EXPENSES
+            ======================================= -->
+
+            <section class="page-section" id="expenses"
+                     data-section="expenses">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Expenses Management</h2>
+                        <p>Monitor operating costs and business expenses.</p>
+                    </div>
+
+                    <button class="btn btn-primary"
+                            data-action="new-expense">
+                        + Record Expense
+                    </button>
+                </div>
+
+                <div class="stats-grid compact-stats">
+                    <article class="stat-card">
+                        <p>Total Expenses</p>
+                        <h3 id="expenseTotal">₦0.00</h3>
+                    </article>
+                    <article class="stat-card">
+                        <p>This Month</p>
+                        <h3 id="expenseMonthly">₦0.00</h3>
+                    </article>
+                </div>
+
+                <article class="panel">
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Expense ID</th>
+                                    <th>Description</th>
+                                    <th>Category</th>
+                                    <th>Date</th>
+                                    <th>Payment Method</th>
+                                    <th>Amount</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="expensesTableBody">
+                                <tr>
+                                    <td colspan="7" class="empty-table">
+                                        Expense records will appear here.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+            </section>
+
+
+            <!-- ======================================
+                 REPORTS
+            ======================================= -->
+
+            <section class="page-section" id="reports"
+                     data-section="reports">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Reports & Analytics</h2>
+                        <p>Understand business performance through reports and analytics.</p>
+                    </div>
+
+                    <button class="btn btn-secondary"
+                            data-action="export-report">
+                        ↓ Export Report
+                    </button>
+                </div>
+
+                <article class="panel">
+                    <div class="toolbar">
+                        <select id="reportType" aria-label="Report type">
+                            <option value="sales">Sales Report</option>
+                            <option value="inventory">Inventory Report</option>
+                            <option value="customers">Customer Report</option>
+                            <option value="expenses">Expenses Report</option>
+                            <option value="profit">Profit & Loss</option>
+                        </select>
+
+                        <select id="reportPeriod" aria-label="Report period">
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly" selected>Monthly</option>
+                            <option value="yearly">Yearly</option>
+                        </select>
+
+                        <input type="date" id="reportStartDate"
+                               aria-label="Report start date">
+
+                        <input type="date" id="reportEndDate"
+                               aria-label="Report end date">
+
+                        <button class="btn btn-primary"
+                                data-action="generate-report">
+                            Generate Report
+                        </button>
+                    </div>
+
+                    <div id="reportResults">
+                        <div class="empty-state">
+                            Select your report filters and generate a report.
+                        </div>
+                    </div>
+                </article>
+
+            </section>
+
+
+            <!-- ======================================
+                 SETTINGS
+            ======================================= -->
+
+            <section class="page-section" id="settings"
+                     data-section="settings">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>System Settings</h2>
+                        <p>Configure your business information and application preferences.</p>
+                    </div>
+                </div>
+
+                <article class="panel settings-panel">
+
+                    <div class="settings-section">
+                        <h3>Business Information</h3>
+                        <p>Configure your company details.</p>
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label for="businessName">Business Name</label>
+                                <input type="text" id="businessName"
+                                       placeholder="Enter business name">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="businessEmail">Business Email</label>
+                                <input type="email" id="businessEmail"
+                                       placeholder="Enter business email">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="businessPhone">Phone Number</label>
+                                <input type="tel" id="businessPhone"
+                                       placeholder="Enter phone number">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="businessCurrency">Currency</label>
+                                <select id="businessCurrency">
+                                    <option value="NGN">NGN - Nigerian Naira</option>
+                                    <option value="USD">USD - US Dollar</option>
+                                    <option value="GBP">GBP - British Pound</option>
+                                    <option value="EUR">EUR - Euro</option>
+                                    <option value="AUD">AUD - Australian Dollar</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="businessAddress">Business Address</label>
+                                <textarea id="businessAddress"
+                                          rows="3"
+                                          placeholder="Enter business address"></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Receipt Information</h3>
+                        <p>Customize the information displayed on sales receipts.</p>
+
+                        <div class="form-group">
+                            <label for="receiptFooter">Receipt Footer Message</label>
+                            <textarea id="receiptFooter" rows="3"
+                                      placeholder="Thank you for your business!"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Appearance</h3>
+                        <p>Choose your preferred application theme.</p>
+
+                        <div class="form-group">
+                            <label for="systemTheme">System Theme</label>
+                            <select id="systemTheme">
+                                <option value="light">Light</option>
+                                <option value="dark">Dark</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Notifications</h3>
+                        <p>Manage business notification preferences.</p>
+
+                        <label class="setting-toggle">
+                            <span>Low stock notifications</span>
+                            <input type="checkbox" id="lowStockNotifications"
+                                   checked>
+                        </label>
+
+                        <label class="setting-toggle">
+                            <span>New order notifications</span>
+                            <input type="checkbox" id="orderNotifications"
+                                   checked>
+                        </label>
+                    </div>
+
+                    <button class="btn btn-primary"
+                            data-action="save-settings">
+                        Save Settings
+                    </button>
+
+                </article>
+
+            </section>
+
+
+            <!-- ======================================
+                 LOGOUT
+            ======================================= -->
+
+            <section class="page-section" id="logout"
+                     data-section="logout">
+
+                <div class="panel">
+                    <h2>Logout</h2>
+                    <p>
+                        This frontend demonstration does not have user
+                        authentication yet. A secure logout system will
+                        require a backend when authentication is introduced.
+                    </p>
+                    <button class="btn btn-secondary"
+                            data-action="return-dashboard">
+                        Return to Dashboard
+                    </button>
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <footer class="main-footer">
+            <p>
+                © <span id="currentYear">2026</span>
+                GlassPro Management Suite.
+                Mr Zenze Developer
+                All rights reserved.
+            </p>
+
+            <span>Designed for modern glass businesses.</span>
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- GLOBAL MODAL CONTAINER -->
+
+<div class="modal-overlay" id="modalOverlay"
+     aria-hidden="true">
+
+    <div class="modal-container" id="modalContainer"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="modalTitle">
+
+        <div class="modal-header">
+            <div>
+                <h2 id="modalTitle">Form</h2>
+                <p id="modalSubtitle">Enter the required information.</p>
+            </div>
+
+            <button class="modal-close" id="modalClose"
+                    aria-label="Close dialog">
+                &times;
+            </button>
+        </div>
+
+        <div class="modal-body" id="modalBody">
+            <!-- Dynamic form content will be inserted here. -->
+        </div>
+
+        <div class="modal-footer" id="modalFooter">
+            <button class="btn btn-secondary" id="modalCancel">
+                Cancel
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- NOTIFICATION CONTAINER -->
+
+<div class="toast-container" id="toastContainer"
+     aria-live="polite" aria-atomic="true">
+</div>
+
+
+<!-- JAVASCRIPT FILES -->
+
+<script src="js/storage.js" defer></script>
+<script src="js/dashboard.js" defer></script>
+<script src="js/inventory.js" defer></script>
+<script src="js/customers.js" defer></script>
+<script src="js/sales.js" defer></script>
+<script src="js/orders.js" defer></script>
+<script src="js/cutting.js" defer></script>
+<script src="js/installation.js" defer></script>
+<script src="js/staff.js" defer></script>
+<script src="js/expenses.js" defer></script>
+<script src="js/suppliers.js" defer></script>
+<script src="js/purchases.js" defer></script>
+<script src="js/reports.js" defer></script>
+<script src="js/settings.js" defer></script>
+<script src="js/backup.js" defer></script>
+<script src="js/app.js" defer></script>
+
+</body>
+</html>
